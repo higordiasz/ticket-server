@@ -1,0 +1,11 @@
+{
+  "name": "ticket-server",
+  "version": "1.0.0",
+  "description": "Ticket System",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dias",
+  "license": "ISC"
+}
