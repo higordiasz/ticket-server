@@ -1,0 +1,10 @@
+{
+  "DEFAULT_MESSAGE": {
+    "en": "DEFAULT",
+    "pt-br": "DEFAULT"
+  },
+  "ERROR_MESSAGE_TOKEN_NOT_FOUND": {
+    "en": "The token procided is not valid.",
+    "pt-br": "O token fornecido não é valido"
+  }
+}
