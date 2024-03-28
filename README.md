@@ -59,8 +59,10 @@ You can support the maintainer of this project through the links below
 
 To use this API create a .env file.
 
-`DBCONNECTION= String connection of MongoDB
-URLSYSTEM= Webhook discord`
+```
+DBCONNECTION= String connection of MongoDB
+URLSYSTEM= Webhook discord
+```
 
 ## License
 
