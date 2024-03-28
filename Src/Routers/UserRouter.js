@@ -1,21 +1,20 @@
 import { Router } from "express";
+import Controller from "../Controllers/index.js";
 
 const userRouter = Router();
 
-userRouter.all("/", (req, res, next) => {});
+userRouter.get("/get/:userID", Controller.user.get);
 
-userRouter.get("/get/:userID", async (req, res, next) => {});
+userRouter.post("/update/:userID", Controller.user.update);
 
-userRouter.post("/update/:userID", async (req, res, next) => {});
+userRouter.post("/delete/:userID", Controller.user.delete);
 
-userRouter.post("/delete/:userID", async (req, res, next) => {});
+userRouter.post("/disable/:userID", Controller.user.disable);
 
-userRouter.post("/disable/:userID", async (req, res, next) => {});
+userRouter.post("/enable/:userID", Controller.user.enable);
 
-userRouter.post("/enable/:userID", async (req, res, next) => {});
+userRouter.post("/password/:userID", Controller.user.changePassword);
 
-userRouter.post("/password/:userID", async (req, res, next) => {});
-
-userRouter.post("/create", async (req, res, next) => {});
+userRouter.post("/create", Controller.user.create);
 
 export { userRouter };

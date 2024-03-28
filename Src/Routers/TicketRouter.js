@@ -1,13 +1,14 @@
 import { Router } from "express";
+import Controller from "../Controllers/index.js";
 
 const ticketRouter = Router();
 
-ticketRouter.get("/get/:ticketID", async (req, res, next) => {});
+ticketRouter.get("/get/:ticketID", Controller.ticket.get);
 
-ticketRouter.post("/update/:ticketID", async (req, res, next) => {});
+ticketRouter.post("/update/:ticketID", Controller.ticket.update);
 
-ticketRouter.post("/close/:ticketID", async (req, res, next) => {});
+ticketRouter.post("/close/:ticketID", Controller.ticket.close);
 
-ticketRouter.post("/create/:ticketID", async (req, res, next) => {});
+ticketRouter.post("/create", Controller.ticket.create);
 
 export { ticketRouter };

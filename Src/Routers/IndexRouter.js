@@ -1,9 +1,10 @@
 import { Router } from "express";
+import Controller from "../Controllers/index.js";
 
 const indexRouter = Router();
 
-indexRouter.all("/", (req, res, next) => {
-  return res.status(200).send({ teste: "testado" });
-});
+indexRouter.all("/", Controller.index.default);
+
+indexRouter.get("/version", Controller.index.getVersion);
 
 export { indexRouter };

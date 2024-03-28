@@ -1,11 +1,11 @@
 import Language from "../../Config/language.json" assert { type: "json" };
 
-const Language = {};
+const Controller = {};
 
-Language.getMessage = (message = "DEFAULT_MESSAGE", language = "en") => {
+Controller.getMessage = (message = "DEFAULT_MESSAGE", language = "en") => {
   let messageString = message.toUpperCase();
   let languageString = language.toLowerCase();
   return Language[messageString][languageString];
 };
 
-export default Language;
+export default Controller;

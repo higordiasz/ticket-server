@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { nextTick } from "process";
+import Controller from "../Controllers/index.js";
 
 const loginRouter = Router();
 
-loginRouter.get("/", async (req, res, next) => {});
+loginRouter.post("/", Controller.login.login);
+
+loginRouter.post("/check", Controller.login.login);
 
 export { loginRouter };

@@ -17,12 +17,16 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  accounLink: {
-    type: Boolean,
+  accountType: {
+    type: String,
+    required: true,
+  },
+  fullName: {
+    type: String,
     required: true,
   },
   created: {
-    type: String,
+    type: Date,
     required: true,
   },
 });
