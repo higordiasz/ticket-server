@@ -1,0 +1,89 @@
+{
+  "PREFEITURA_MUNICIPAL_DE_PANCAS": {
+    "SECRETARIA_DE_SAUDE": {
+      "NAME": "Secretaria de Saúde",
+      "SECTORS": {
+        "UNIDADE_CENTRO": { "NAME": "Posto de Saude - Centro" },
+        "UNIDADE_VILA_NOVA": { "NAME": "Posto de Saude - Vila Nova" },
+        "UNIDADE_PRATINHA": { "NAME": "Posto de Saude - Pratinha" },
+        "UNIDADE_LAGINHA": { "NAME": "Posto de Saude - Laginha" },
+        "UNIDADE_VILA_VERDE": { "NAME": "Posto de Saude - Vila Verde" }
+      }
+    },
+    "SECRETARIA_DE_ESPORTE": {
+      "NAME": "Secretaria de Esporte",
+      "SECTORS": {
+        "SECRETARIA": { "NAME": "Secretaria" }
+      }
+    },
+    "SECRETARIA_DE_EDUCACAO": {
+      "NAME": "Secretaria de Educação",
+      "SECTORS": {
+        "SECRETARIA": { "NAME": "Secretaria" },
+        "HENOC": { "NAME": "Escola - Henoc" },
+        "ORAIDE": { "NAME": "Escola - Oraide" }
+      }
+    },
+    "SECRETARIA_DE_ASSISTENCIA_SOCIAL": {
+      "NAME": "Secretaria de Assistencia Social",
+      "SECTORS": {
+        "": { "NAME": "" }
+      }
+    },
+    "SECRETARIA_DE_TURISMO": {
+      "NAME": "Secretaria de Turismo",
+      "SECTORS": {
+        "": { "NAME": "" }
+      }
+    },
+    "SECRETARIA_DE_AGRICULTURA": {
+      "NAME": "Secretaria de Agricultura",
+      "SECTORS": {
+        "": { "NAME": "" }
+      }
+    },
+    "SECRETARIA_DE_MEIO_AMBIENTE": {
+      "NAME": "Secretaria de Meio Ambiente",
+      "SECTORS": {
+        "": { "NAME": "" }
+      }
+    },
+    "SECRETARIA_DE_ADMINISTRACAO": {
+      "NAME": "Secretaria de Administração",
+      "SECTORS": {
+        "RH": { "NAME": "Recursos Humanos" },
+        "ADMINISTRACAO": { "NAME": "Administração" },
+        "TI": { "NAME": "Divisão de informática" },
+        "PROTOCOLO": { "NAME": "Protocolo" }
+      }
+    },
+    "SCRETARIA_DE_FINANCAS": {
+      "NAME": "Secretaria de Finanças",
+      "SECTORS": {
+        "TESOURARIA": { "NAME": "Tesouraria" },
+        "CONTABILIDADE": { "NAME": "Contabilidade" },
+        "TRIBUTACAO": { "NAME": "Tributação" },
+        "FISCALIZACAO": { "NAME": "Fiscalização" }
+      }
+    },
+    "SECRETARIA_DE_OBRAS": {
+      "NAME": "Secretaria de Obras",
+      "SECTORS": {
+        "OBRAS": { "NAME": "Obras" }
+      }
+    },
+    "SECRETARIA_DE_TRANSPORTE": {
+      "NAME": "Secretaria de Transporte",
+      "SECTORS": {
+        "AGENDAMENTO": { "NAME": "Agendamento" }
+      }
+    },
+    "GABINETE": {
+      "NAME": "Gabinete",
+      "SECTORS": {
+        "GABINETE": { "NAME": "Gabinete" },
+        "OUVIDORIA": { "NAME": "Ouvidoria" }
+      }
+    }
+  }
+}

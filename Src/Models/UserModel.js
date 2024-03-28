@@ -29,6 +29,18 @@ const userSchema = new Schema({
     type: Date,
     required: true,
   },
+  company: {
+    type: String,
+    required: true,
+  },
+  departments: {
+    type: Array,
+    required: true,
+  },
+  token: {
+    type: String,
+    required: true,
+  },
 });
 
 const userModel = model("user", userSchema);

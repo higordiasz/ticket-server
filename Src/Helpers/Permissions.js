@@ -1,7 +1,23 @@
 import Config from "../../Config/cofnig.json" assert { type: "json" };
 
-const Permissions = {};
+const List = {};
+List.user = {
+  create_user: "create_user",
+  create_support: "create_support",
+  create_admin: "create_admin",
+};
+List.Ticket = {
+  create: "create_ticket",
+  close: "close_ticket",
+  reply: "reply_ticket",
+};
+List.Company = {
+  report_monthly: "monthly_report",
+  report_daily: "daily_report",
+};
 
+const Permissions = {};
+Permissions.List = List;
 Permissions.havePermission = (
   permission = "create_ticket",
   userType = "user"
