@@ -55,6 +55,13 @@ You can support the maintainer of this project through the links below
 
 - [Support via GitHub Sponsors](https://github.com/sponsors/higordiasz)
 
+## .env
+
+To use this API create a .env file.
+
+`DBCONNECTION= String connection of MongoDB
+URLSYSTEM= Webhook discord`
+
 ## License
 
 Copyright 2024 Higor D Zuqueto
