@@ -7,8 +7,6 @@ userRouter.get("/get/:userID", Controller.user.get);
 
 userRouter.post("/update/:userID", Controller.user.update);
 
-userRouter.post("/delete/:userID", Controller.user.delete);
-
 userRouter.post("/disable/:userID", Controller.user.disable);
 
 userRouter.post("/enable/:userID", Controller.user.enable);

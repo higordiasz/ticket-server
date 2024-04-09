@@ -35,6 +35,10 @@
     "en": "The request could not be made.",
     "pt-br": "Não foi possivel realizar a requisição."
   },
+  "DEFAULT_SUCCESS": {
+    "en": "Request made successfully.",
+    "pt-br": "Requisição realizada com sucesso."
+  },
   "": {
     "en": "",
     "pt-br": ""

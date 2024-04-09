@@ -1,4 +1,5 @@
 import * as Tools from "../Helpers/index.js";
+import * as Models from "../Models/index.js";
 
 const Response = {};
 
@@ -55,6 +56,22 @@ Response.defaultErrorMessage = (res, language = "default") => {
     error: false,
     data: {},
     message: Tools.Language.getMessage("DEFAULT_ERROR", language),
+  });
+};
+
+Response.sendUser = (res, user, language = "default") => {
+  return res.status(200).send({
+    error: false,
+    data: Models.Controllers.user.userToJson(user),
+    message: Tools.Language.getMessage("DEFAULT_SUCCESS", language),
+  });
+};
+
+Response.defaultSuccessMessage = (res, language = "default") => {
+  return res.status(200).send({
+    error: false,
+    data: {},
+    message: Tools.Language.getMessage("DEFAULT_SUCCESS", language),
   });
 };
 

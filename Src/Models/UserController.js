@@ -17,6 +17,18 @@ Private.checkUsername = (username) => {
   return true;
 };
 
+Private.getUserByUserID = async (userID) => {
+  let user = await Models.user.findOne({ userID: userID });
+  if (!user) return null;
+  return user;
+};
+
+Private.getUserByToken = async (token) => {
+  let user = await Models.user.findOne({ token: token });
+  if (!user) return null;
+  return user;
+};
+
 Controller.validateCreationBody = (body) => {
   if (!body.username) return false;
   if (!isNaN(body.username)) return false;
@@ -60,6 +72,18 @@ Controller.getuserByToken = async (token) => {
   return user;
 };
 
+Controller.updateUser = async (token, updateFields) => {
+  let user = await Private.getUserByToken(token);
+  if (!user) return false;
+  user.fullName = updateFields.name || user.fullName;
+  user.email = updateFields.email || user.email;
+  user.username = updateFields.username || user.username;
+  user.company = updateFields.company || user.company;
+  user.departments = updateFields.departments || user.departments;
+  await user.save();
+  return true;
+};
+
 Controller.createUser = async (body, language = "default") => {
   let ret = new Tools.Return();
   if (!Private.checkEmail(body.email)) {
@@ -91,6 +115,7 @@ Controller.createUser = async (body, language = "default") => {
       token: Tools.Token.generateToken(body.username, body.email),
       userID: userID,
       username: body.username,
+      enable: true,
     })
     .then(() => {
       return true;
@@ -110,6 +135,45 @@ Controller.createUser = async (body, language = "default") => {
   ret.code = 4;
   ret.data = null;
   return ret;
+};
+
+Controller.disableUser = async (userID) => {
+  let user = await Private.getUserByUserID(userID);
+  if (!user) return false;
+  user.enable = false;
+  await user.save();
+  return true;
+};
+
+Controller.enableUser = async (userID) => {
+  let user = await Private.getUserByUserID(userID);
+  if (!user) return false;
+  user.enable = true;
+  await user.save();
+  return true;
+};
+
+Controller.changePassword = async (userID, newPassword) => {
+  let user = await Private.getUserByUserID(userID);
+  if (!user) return false;
+  if (!newPassword) return false;
+  if (!isNaN(newPassword)) return false;
+  if (newPassword.length < Tools.Config.minPasswordLength) return false;
+  if (newPassword.length > Tools.Config.maxPasswordLength) return false;
+  let password = md5(newPassword);
+  user.password = md5(password);
+  await user.save();
+  return true;
+};
+
+Controller.userToJson = (user) => {
+  let json = {};
+  json.name = user.fullName;
+  json.email = user.email;
+  json.username = user.username;
+  json.company = user.company;
+  json.departments = user.departments;
+  return json;
 };
 
 export default Controller;

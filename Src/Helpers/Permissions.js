@@ -5,6 +5,10 @@ List.user = {
   create_user: "create_user",
   create_support: "create_support",
   create_admin: "create_admin",
+  update_user: "update_user",
+  change_password: "change_password",
+  administrator: "administrator",
+  delete_user: "delete_user",
 };
 List.Ticket = {
   create: "create_ticket",

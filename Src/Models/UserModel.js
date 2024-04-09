@@ -37,6 +37,10 @@ const userSchema = new Schema({
     type: Array,
     required: true,
   },
+  enable: {
+    type: Boolean,
+    required: true,
+  },
   token: {
     type: String,
     required: true,

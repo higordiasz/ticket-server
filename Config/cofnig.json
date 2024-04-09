@@ -8,7 +8,11 @@
       "close_ticket": true,
       "reply_ticket": true,
       "monthly_report": true,
-      "daily_report": true
+      "daily_report": true,
+      "update_user": true,
+      "change_password": true,
+      "administrator": true,
+      "delete_user": true
     },
     "SUPPORT": {
       "create_user": false,
@@ -18,7 +22,11 @@
       "close_ticket": true,
       "reply_ticket": true,
       "monthly_report": false,
-      "daily_report": false
+      "daily_report": false,
+      "update_user": true,
+      "change_password": true,
+      "administrator": false,
+      "delete_user": false
     },
     "USER": {
       "create_user": false,
@@ -28,7 +36,11 @@
       "close_ticket": false,
       "reply_ticket": true,
       "monthly_report": false,
-      "daily_report": false
+      "daily_report": false,
+      "update_user": true,
+      "change_password": true,
+      "administrator": false,
+      "delete_user": false
     }
   },
   "API_VERSION": {
