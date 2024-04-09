@@ -7,6 +7,6 @@ const ticketSchema = new Schema({
   },
 });
 
-const ticketModel = model("user", ticketSchema);
+const ticketModel = model("ticket", ticketSchema);
 
 export { ticketModel };
