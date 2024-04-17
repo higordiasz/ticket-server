@@ -4,6 +4,7 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import connectMongo from "../Database/Connection.js";
+import cors from "cors";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
@@ -19,6 +20,12 @@ app.use(
 app.set("trust proxy", true);
 
 connectMongo();
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use((req, res, next) => {
   if ((req.headers["x-forwarded-proto"] || "").endsWith("http"))
