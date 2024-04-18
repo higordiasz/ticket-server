@@ -9,7 +9,6 @@ const Controller = {};
  * @param {Ticket} ticket
  */
 Controller.createTicket = async (ticket) => {
-  if (!Ticket.validateFormat(ticket)) return false;
   let ticketID = uuidv4();
   return await ticketModel
     .create({

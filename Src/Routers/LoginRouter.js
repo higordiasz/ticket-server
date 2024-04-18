@@ -5,6 +5,6 @@ const loginRouter = Router();
 
 loginRouter.post("/", Controller.login.login);
 
-loginRouter.post("/check", Controller.login.login);
+loginRouter.post("/check", Controller.login.check);
 
 export { loginRouter };

@@ -1,4 +1,3 @@
-import { model } from "mongoose";
 import * as Tools from "../Helpers/index.js";
 import { Models } from "./index.js";
 import { v4 as uuidv4 } from "uuid";
@@ -25,6 +24,12 @@ Private.getUserByUserID = async (userID) => {
 
 Private.getUserByToken = async (token) => {
   let user = await Models.user.findOne({ token: token });
+  if (!user) return null;
+  return user;
+};
+
+Controller.getUserByUsername = async (username) => {
+  let user = Models.user.findOne({ username: username });
   if (!user) return null;
   return user;
 };
@@ -67,7 +72,7 @@ Controller.validateCreationBody = (body) => {
 };
 
 Controller.getuserByToken = async (token) => {
-  let user = Models.user.findOne({ token: token });
+  let user = await Models.user.findOne({ token: token });
   if (!user) return null;
   return user;
 };
@@ -162,6 +167,14 @@ Controller.changePassword = async (userID, newPassword) => {
   if (newPassword.length > Tools.Config.maxPasswordLength) return false;
   let password = md5(newPassword);
   user.password = md5(password);
+  await user.save();
+  return true;
+};
+
+Controller.updateToken = async (userID, token) => {
+  let user = await Models.user.findOne({ userID: userID });
+  if (!user) return false;
+  user.token = token;
   await user.save();
   return true;
 };

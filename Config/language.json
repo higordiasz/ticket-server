@@ -39,6 +39,22 @@
     "en": "Request made successfully.",
     "pt-br": "Requisição realizada com sucesso."
   },
+  "LOGIN_FAILED": {
+    "en": "Wrong username or password.",
+    "pt-br": "Nome de usuário ou senha incorretos."
+  },
+  "LOGIN_SUCCESS": {
+    "en": "Welcome back.",
+    "pt-br": "Bem vindo de volta."
+  },
+  "CHECK_FAILED": {
+    "en": "Invalid token.",
+    "pt-br": "Token inválido."
+  },
+  "CHECK_SUCCESS": {
+    "en": "Token working.",
+    "pt-br": "Token funcionando."
+  },
   "": {
     "en": "",
     "pt-br": ""

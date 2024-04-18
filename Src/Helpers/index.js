@@ -8,6 +8,7 @@ import Companies from "./Company.js";
 import Return from "./Return.js";
 import Token from "./Token.js";
 import { Ticket, Message } from "./Ticket.js";
+import Validate from "./Validate.js";
 
 export {
   webHook,
@@ -21,4 +22,5 @@ export {
   Token,
   Ticket,
   Message,
+  Validate,
 };

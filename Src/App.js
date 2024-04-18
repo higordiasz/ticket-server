@@ -34,7 +34,6 @@ app.use((req, res, next) => {
 });
 
 import * as Routers from "./Routers/index.js";
-
 app.use("/", Routers.indexRouter);
 app.use("/login", Routers.loginRouter);
 app.use("/ticket", Routers.ticketRouter);

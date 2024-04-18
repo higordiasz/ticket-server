@@ -1,8 +1,14 @@
 import * as Tools from "../Helpers/index.js";
 import { Controllers, Models } from "../Models/index.js";
+import { request, response } from "express";
 
 const Controller = {};
 
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ */
 Controller.get = async (req, res) => {
   let body = req.body;
   let query = req.query;
@@ -12,6 +18,11 @@ Controller.get = async (req, res) => {
   return Tools.Response.sendUser(res, user);
 };
 
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ */
 Controller.update = async (req, res) => {
   let body = req.body;
   let query = req.query;
@@ -36,6 +47,11 @@ Controller.update = async (req, res) => {
   return Tools.Response.defaultErrorMessage(res, language);
 };
 
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ */
 Controller.disable = async (req, res) => {
   let body = req.body;
   let query = req.query;
@@ -55,6 +71,11 @@ Controller.disable = async (req, res) => {
   return Tools.Response.defaultErrorMessage(res, language);
 };
 
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ */
 Controller.enable = async (req, res) => {
   let body = req.body;
   let query = req.query;
@@ -74,6 +95,11 @@ Controller.enable = async (req, res) => {
   return Tools.Response.defaultErrorMessage(res, language);
 };
 
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ */
 Controller.changePassword = async (req, res) => {
   let body = req.body;
   let query = req.query;
@@ -98,6 +124,11 @@ Controller.changePassword = async (req, res) => {
   return Tools.Response.defaultErrorMessage(res, language);
 };
 
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ */
 Controller.create = async (req, res) => {
   let body = req.body;
   let query = req.query;

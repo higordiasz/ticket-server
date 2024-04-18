@@ -3,16 +3,40 @@ import Controller from "../Controllers/index.js";
 
 const userRouter = Router();
 
-userRouter.get("/get/:userID", Controller.user.get);
+userRouter.get(
+  "/get/:userID",
+  Controller.middleware.authentication,
+  Controller.user.get
+);
 
-userRouter.post("/update/:userID", Controller.user.update);
+userRouter.post(
+  "/update/:userID",
+  Controller.middleware.authentication,
+  Controller.user.update
+);
 
-userRouter.post("/disable/:userID", Controller.user.disable);
+userRouter.post(
+  "/disable/:userID",
+  Controller.middleware.authentication,
+  Controller.user.disable
+);
 
-userRouter.post("/enable/:userID", Controller.user.enable);
+userRouter.post(
+  "/enable/:userID",
+  Controller.middleware.authentication,
+  Controller.user.enable
+);
 
-userRouter.post("/password/:userID", Controller.user.changePassword);
+userRouter.post(
+  "/password/:userID",
+  Controller.middleware.authentication,
+  Controller.user.changePassword
+);
 
-userRouter.post("/create", Controller.user.create);
+userRouter.post(
+  "/create",
+  Controller.middleware.authentication,
+  Controller.user.create
+);
 
 export { userRouter };
