@@ -7,6 +7,7 @@ import Config from "./ApiConfig.js";
 import Companies from "./Company.js";
 import Return from "./Return.js";
 import Token from "./Token.js";
+import { Ticket, Message } from "./Ticket.js";
 
 export {
   webHook,
@@ -18,4 +19,6 @@ export {
   Companies,
   Return,
   Token,
+  Ticket,
+  Message,
 };

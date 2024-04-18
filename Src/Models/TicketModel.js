@@ -1,8 +1,32 @@
 import { Schema, model } from "mongoose";
 
 const ticketSchema = new Schema({
-  username: {
+  created: {
+    type: Date,
+    required: true,
+  },
+  ticketID: {
     type: String,
+    required: true,
+  },
+  ownerID: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  messages: {
+    type: Array,
+    required: true,
+  },
+  urgent: {
+    type: Boolean,
+    required: true,
+  },
+  resolved: {
+    type: Boolean,
     required: true,
   },
 });
