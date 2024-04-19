@@ -19,31 +19,31 @@ This is a basic API for a ticket system.
 
 ### User
 
-| Router            | Status | Type | Description                |
-| ----------------- | ------ | ---- | -------------------------- |
-| /get/:userID      | ✖      | GET  | Get information of user    |
-| /update/:userID   | ✖      | POST | Update information of user |
-| /delete/:userID   | ✖      | POST | Delete one user account    |
-| /disable/:userID  | ✖      | POST | Disable user account       |
-| /enable/:userID   | ✖      | POST | Enable user account        |
-| /password/:userID | ✖      | POST | Change password            |
-| /create           | ✖      | POST | Create one user            |
+| Router           | Status | Type | Description             |
+| ---------------- | ------ | ---- | ----------------------- |
+| /get             | ✔      | GET  | Get information of user |
+| /disable/:userID | ✔      | GET  | Disable user account    |
+| /enable/:userID  | ✔      | GET  | Enable user account     |
+| /password        | ✔      | POST | Change password         |
+| /create          | ✔      | POST | Create one user         |
 
 ### Ticket
 
-| Router            | Status | Type | Description                  |
-| ----------------- | ------ | ---- | ---------------------------- |
-| /get/:ticketID    | ✖      | GET  | Get information of ticket    |
-| /update/:ticketID | ✖      | POST | Update information of ticket |
-| /close/:ticketID  | ✖      | POST | Close one ticket             |
-| /create           | ✖      | POST | Create Ticket                |
+| Router                 | Status | Type | Description                 |
+| ---------------------- | ------ | ---- | --------------------------- |
+| /get/:ticketID         | ✔      | GET  | Get information of ticket   |
+| /getall                | ✔      | GET  | Get all tickets             |
+| /urgent/:ticketID      | ✔      | GET  | Update ticket to urgent     |
+| /close/:ticketID       | ✔      | GET  | Close one ticket            |
+| /message/add/:ticketID | ✔      | POST | Add a new message in ticket |
+| /create                | ✔      | POST | Create Ticket               |
 
 ### Login
 
 | Router | Status | Type | Description             |
 | ------ | ------ | ---- | ----------------------- |
-| /      | ✖      | POST | Login                   |
-| /check | ✖      | POST | Check if token is valid |
+| /      | ✔      | POST | Login                   |
+| /check | ✔      | POST | Check if token is valid |
 
 ## Contributing
 
