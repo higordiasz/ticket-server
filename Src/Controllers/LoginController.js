@@ -17,6 +17,7 @@ Controller.login = async (req, res) => {
     return Tools.Response.loginFailed(res, language);
   let user = await DB.Controllers.user.getUserByUsername(body.username);
   if (!user) return Tools.Response.loginFailed(res, language);
+  if (!user.enable) return Tools.Response.userDisabled(res, language);
   if (user.password != body.password)
     return Tools.Response.loginFailed(res, language);
   let token = Tools.Token.generateToken(user.username, user.email);
@@ -37,6 +38,7 @@ Controller.check = async (req, res) => {
   if (!Tools.Validate.checkBody(body))
     return Tools.Response.checkFailed(res, language);
   let user = await DB.Controllers.user.getuserByToken(body.token);
+  if (!user.enable) return Tools.Response.userDisabled(res, language);
   if (!user) return Tools.Response.checkFailed(res, language);
   return Tools.Response.checkSuccess(res, language);
 };

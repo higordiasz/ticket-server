@@ -6,14 +6,14 @@ import md5 from "md5";
 const Controller = {};
 const Private = {};
 
-Private.checkEmail = (email) => {
-  if (Models.user.findOne({ email: email }) != null) return false;
-  return true;
+Private.checkEmail = async (email) => {
+  if (!(await Models.user.findOne({ email: email }))) return true;
+  return false;
 };
 
-Private.checkUsername = (username) => {
-  if (Models.user.findOne({ username: username }) != null) return false;
-  return true;
+Private.checkUsername = async (username) => {
+  if (!(await Models.user.findOne({ username: username }))) return true;
+  return false;
 };
 
 Private.getUserByUserID = async (userID) => {
@@ -32,43 +32,6 @@ Controller.getUserByUsername = async (username) => {
   let user = Models.user.findOne({ username: username });
   if (!user) return null;
   return user;
-};
-
-Controller.validateCreationBody = (body) => {
-  if (!body.username) return false;
-  if (!isNaN(body.username)) return false;
-  if (body.username.length < Tools.Config.minUsernameLenght) return false;
-  if (body.username.length > Tools.Config.maxUsernameLenght) return false;
-
-  if (!body.paswword) return false;
-  if (!isNaN(body.paswword)) return false;
-  if (body.paswword.length < Tools.Config.minPasswordLength) return false;
-  if (body.paswword.length > Tools.Config.maxPasswordLength) return false;
-
-  if (!body.name) return false;
-  if (!isNaN(body.name)) return false;
-  if (body.name.length > 1) return false;
-
-  if (!body.email) return false;
-  if (!isNaN(body.email)) return false;
-  if (body.email.length > 1) return false;
-
-  if (!body.type) return false;
-  if (!isNaN(body.type)) return false;
-  if (body.type.length > 1) return false;
-
-  if (!body.company) return false;
-  if (!isNaN(body.company)) return false;
-  if (body.company.length > 0) return false;
-
-  if (!body.departments) return false;
-  if (!Array.isArray(body.departments)) return false;
-  if (body.departments.length > 0) return false;
-
-  if (!Tools.Companies.validateDepartments(body.company, body.departments))
-    return false;
-
-  return true;
 };
 
 Controller.getuserByToken = async (token) => {
@@ -91,14 +54,14 @@ Controller.updateUser = async (token, updateFields) => {
 
 Controller.createUser = async (body, language = "default") => {
   let ret = new Tools.Return();
-  if (!Private.checkEmail(body.email)) {
+  if (!(await Private.checkEmail(body.email))) {
     ret.code = 2;
     ret.error = true;
     ret.message = "";
     ret.data = null;
     return ret;
   }
-  if (!Private.checkUsername(body.username)) {
+  if (!(await Private.checkUsername(body.username))) {
     ret.code = 3;
     ret.error = true;
     ret.message = "";
@@ -181,9 +144,11 @@ Controller.updateToken = async (userID, token) => {
 
 Controller.userToJson = (user) => {
   let json = {};
-  json.name = user.fullName;
-  json.email = user.email;
+  json.userID = user.userID;
+  json.accountType = user.accountType;
   json.username = user.username;
+  json.email = user.email;
+  json.name = user.fullName;
   json.company = user.company;
   json.departments = user.departments;
   return json;

@@ -10,12 +10,9 @@ const Controller = {};
  * @param {response} res
  */
 Controller.get = async (req, res) => {
-  let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
-  if (!body.token) return Tools.Response.unauthorized(res, language);
-  let user = await Controllers.user.getuserByToken(body.token);
-  return Tools.Response.sendUser(res, user);
+  return Tools.Response.sendUser(res, req.user, language);
 };
 
 /**
@@ -24,10 +21,10 @@ Controller.get = async (req, res) => {
  * @param {response} res
  */
 Controller.disable = async (req, res) => {
-  let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
   let user = req.user;
+  let userID = req.params.userID;
   if (
     !Tools.Permissions.havePermission(
       Tools.Permissions.List.user.administrator,
@@ -35,8 +32,8 @@ Controller.disable = async (req, res) => {
     )
   )
     return Tools.Response.unauthorized(res, language);
-  if (!body.userid) return Tools.Response.missingRequiredFields(res, language);
-  let completed = await Controllers.user.disableUser(body.userid);
+  if (!userID) return Tools.Response.missingRequiredFields(res, language);
+  let completed = await Controllers.user.disableUser(userID);
   if (completed) return Tools.Response.defaultSuccessMessage(res, language);
   return Tools.Response.defaultErrorMessage(res, language);
 };
@@ -47,10 +44,10 @@ Controller.disable = async (req, res) => {
  * @param {response} res
  */
 Controller.enable = async (req, res) => {
-  let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
   let user = req.user;
+  let userID = req.params.userID;
   if (
     !Tools.Permissions.havePermission(
       Tools.Permissions.List.user.administrator,
@@ -58,8 +55,8 @@ Controller.enable = async (req, res) => {
     )
   )
     return Tools.Response.unauthorized(res, language);
-  if (!body.userid) return Tools.Response.missingRequiredFields(res, language);
-  let completed = await Controllers.user.enableUser(body.userid);
+  if (!userID) return Tools.Response.missingRequiredFields(res, language);
+  let completed = await Controllers.user.enableUser(userID);
   if (completed) return Tools.Response.defaultSuccessMessage(res, language);
   return Tools.Response.defaultErrorMessage(res, language);
 };
@@ -76,7 +73,7 @@ Controller.changePassword = async (req, res) => {
   let user = req.user;
   if (
     !Tools.Permissions.havePermission(
-      Tools.Permissions.List.user.change_password,
+      Tools.Permissions.List.user.administrator,
       user.accountType
     )
   )
@@ -109,7 +106,7 @@ Controller.create = async (req, res) => {
     )
   )
     return Tools.Response.unauthorized(res, language);
-  if (!Controllers.user.validateCreationBody(res, language))
+  if (!Tools.Validate.validateCreationBody(body))
     return Tools.Response.missingRequiredFields(res, language);
   let userCreate = await Controllers.user.createUser(body, language);
   switch (userCreate.code) {
@@ -118,7 +115,36 @@ Controller.create = async (req, res) => {
     case 2:
       return Tools.Response.emailExist(res, language);
     case 3:
-      return Tools.Response.usernameExist(res.language);
+      return Tools.Response.usernameExist(res, language);
+    case 4:
+      return Tools.Response.userNotCreated(res, language);
+    default:
+      return Tools.Response.defaultErrorMessage(res, language);
+  }
+};
+
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ */
+Controller.createToken = async (req, res) => {
+  let body = req.body;
+  let query = req.query;
+  let language = query.lang || "default";
+  let token = req.params.token;
+  let apiToken = process.env.APITOKEN;
+  if (token != apiToken) return Tools.Response.unauthorized(req, language);
+  if (!Tools.Validate.validateCreationBody(body))
+    return Tools.Response.missingRequiredFields(res, language);
+  let userCreate = await Controllers.user.createUser(body, language);
+  switch (userCreate.code) {
+    case 1:
+      return Tools.Response.userCreated(res, language);
+    case 2:
+      return Tools.Response.emailExist(res, language);
+    case 3:
+      return Tools.Response.usernameExist(res, language);
     case 4:
       return Tools.Response.userNotCreated(res, language);
     default:

@@ -59,6 +59,10 @@
     "en": "No ticket was found.",
     "pt-br": "Nenhum ticket foi encontrado."
   },
+  "USER_DISABLED": {
+    "en": "User disabled.",
+    "pt-br": "Usuário desativado."
+  },
   "": {
     "en": "",
     "pt-bt": ""

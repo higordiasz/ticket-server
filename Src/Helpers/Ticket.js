@@ -85,6 +85,7 @@ class Ticket {
       ownerID: this.ownerID,
       resolved: this.resolved,
       urgent: this.urgent,
+      ticketID: this.ticketID,
     };
   }
 
@@ -94,7 +95,7 @@ class Ticket {
    */
   messagesJson() {
     let messagesJson = [];
-    for (let i = 0; i < this.messages; i++) {
+    for (let i = 0; i < this.messages.length; i++) {
       messagesJson.push(this.messages[i].covnertToJson());
     }
     return messagesJson;

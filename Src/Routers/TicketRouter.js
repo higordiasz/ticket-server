@@ -10,7 +10,7 @@ ticketRouter.get(
 );
 
 ticketRouter.get(
-  "/getall/:ticketID",
+  "/getall",
   Controller.middleware.authentication,
   Controller.ticket.getAll
 );

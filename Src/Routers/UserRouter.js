@@ -4,25 +4,25 @@ import Controller from "../Controllers/index.js";
 const userRouter = Router();
 
 userRouter.get(
-  "/get/:userID",
+  "/get",
   Controller.middleware.authentication,
   Controller.user.get
 );
 
-userRouter.post(
+userRouter.get(
   "/disable/:userID",
   Controller.middleware.authentication,
   Controller.user.disable
 );
 
-userRouter.post(
+userRouter.get(
   "/enable/:userID",
   Controller.middleware.authentication,
   Controller.user.enable
 );
 
 userRouter.post(
-  "/password/:userID",
+  "/password",
   Controller.middleware.authentication,
   Controller.user.changePassword
 );
@@ -32,5 +32,7 @@ userRouter.post(
   Controller.middleware.authentication,
   Controller.user.create
 );
+
+userRouter.post("/create/:token", Controller.user.createToken);
 
 export { userRouter };

@@ -202,11 +202,29 @@ Response.sendTickets = (res, tickets, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.ticketNotFound = (res, language = "default") => {
   return res.status(400).send({
     error: false,
     data: { tickets: tickets },
     message: Tools.Language.getMessage("TICKET_NOT_FOUND", language),
+  });
+};
+
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
+Response.userDisabled = (res, language = "default") => {
+  return res.status(400).send({
+    error: true,
+    data: {},
+    message: Tools.Language.getMessage("USER_DISABLED", language),
   });
 };
 

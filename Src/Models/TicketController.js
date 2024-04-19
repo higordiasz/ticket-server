@@ -147,8 +147,8 @@ Controller.getAllTicketsFromUser = async (userID) => {
  */
 Controller.getUrgentTickets = async (isUser = false, userID = "") => {
   let tickets = isUser
-    ? await ticketModel.find({ ownerID: userID, urgent: true })
-    : await ticketModel.find({ urgent: true });
+    ? await ticketModel.find({ ownerID: userID, urgent: true, resolved: false })
+    : await ticketModel.find({ urgent: true, resolved: false });
   let ret = [];
   tickets.forEach((ticket) => {
     let t = new Ticket(
@@ -217,8 +217,8 @@ Controller.getClosedTickets = async (isUser = false, userID = "") => {
  */
 Controller.getNewTickets = async (isUser = false, userID = "") => {
   let all = isUser
-    ? await ticketModel.find({ ownerID: userID })
-    : await ticketModel.find({});
+    ? await ticketModel.find({ ownerID: userID, resolved: false })
+    : await ticketModel.find({ resolved: false });
   let tickets = [];
   all.forEach((a) => {
     let created = new Date(a.created);
@@ -260,8 +260,8 @@ Controller.getNewTickets = async (isUser = false, userID = "") => {
  */
 Controller.getOldTickets = async (isUser = false, userID = "") => {
   let all = isUser
-    ? await ticketModel.find({ ownerID: userID })
-    : await ticketModel.find({});
+    ? await ticketModel.find({ ownerID: userID, resolved: false })
+    : await ticketModel.find({ resolved: false });
   let tickets = [];
   all.forEach((a) => {
     let created = new Date(a.created);
