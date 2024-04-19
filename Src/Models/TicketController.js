@@ -7,6 +7,7 @@ const Controller = {};
 /**
  *
  * @param {Ticket} ticket
+ * @returns {Promise<Boolean}
  */
 Controller.createTicket = async (ticket) => {
   let ticketID = uuidv4();
@@ -32,6 +33,7 @@ Controller.createTicket = async (ticket) => {
  *
  * @param {Message} message
  * @param {String} ticketID
+ * @returns {Promise<Boolean}
  */
 Controller.addMessage = async (message, ticketID) => {
   let ticket = await ticketModel.findOne({ ticketID: ticketID });
@@ -47,6 +49,7 @@ Controller.addMessage = async (message, ticketID) => {
 /**
  *
  * @param {String} ticketID
+ * @returns {Promise<Ticket>}
  */
 Controller.getTicket = async (ticketID) => {
   let ticket = await ticketModel.findOne({ ticketID: ticketID });
@@ -70,6 +73,10 @@ Controller.getTicket = async (ticketID) => {
   return t;
 };
 
+/**
+ *
+ * @returns {Promise<Array<Ticket>>}
+ */
 Controller.getAllTickets = async () => {
   let tickets = await ticketModel.find();
   let ret = [];
@@ -98,6 +105,7 @@ Controller.getAllTickets = async () => {
 /**
  *
  * @param {String} userID
+ * @returns {Promise<Array<Ticket>>}
  */
 Controller.getAllTicketsFromUser = async (userID) => {
   let tickets = await ticketModel.find({ ownerID: userID });
@@ -124,8 +132,16 @@ Controller.getAllTicketsFromUser = async (userID) => {
   return ret;
 };
 
-Controller.getUrgentTickets = async () => {
-  let tickets = await ticketModel.find({ urgent: true });
+/**
+ *
+ * @param {Boolean} isUser
+ * @param {String} userID
+ * @returns {Promise<Array<Ticket>>}
+ */
+Controller.getUrgentTickets = async (isUser = false, userID = "") => {
+  let tickets = isUser
+    ? await ticketModel.find({ ownerID: userID, urgent: true })
+    : await ticketModel.find({ urgent: true });
   let ret = [];
   tickets.forEach((ticket) => {
     let t = new Ticket(
@@ -149,8 +165,16 @@ Controller.getUrgentTickets = async () => {
   return ret;
 };
 
-Controller.getClosedTickets = async () => {
-  let tickets = await ticketModel.find({ resolved: true });
+/**
+ *
+ * @param {Boolean} isUser
+ * @param {String} userID
+ * @returns {Promise<Array<Ticket>>}
+ */
+Controller.getClosedTickets = async (isUser = false, userID = "") => {
+  let tickets = isUser
+    ? await ticketModel.find({ ownerID: userID, resolved: true })
+    : await ticketModel.find({ resolved: true });
   let ret = [];
   tickets.forEach((ticket) => {
     let t = new Ticket(
@@ -174,8 +198,16 @@ Controller.getClosedTickets = async () => {
   return ret;
 };
 
-Controller.getNewTickets = async () => {
-  let all = await ticketModel.find({});
+/**
+ *
+ * @param {Boolean} isUser
+ * @param {String} userID
+ * @returns {Promise<Array<Ticket>>}
+ */
+Controller.getNewTickets = async (isUser = false, userID = "") => {
+  let all = isUser
+    ? await ticketModel.find({ ownerID: userID })
+    : await ticketModel.find({});
   let tickets = [];
   all.forEach((a) => {
     let created = new Date(a.created);
@@ -207,8 +239,16 @@ Controller.getNewTickets = async () => {
   return ret;
 };
 
-Controller.getOldTickets = async () => {
-  let all = await ticketModel.find({});
+/**
+ *
+ * @param {Boolean} isUser
+ * @param {String} userID
+ * @returns {Promise<Array<Ticket>>}
+ */
+Controller.getOldTickets = async (isUser = false, userID = "") => {
+  let all = isUser
+    ? await ticketModel.find({ ownerID: userID })
+    : await ticketModel.find({});
   let tickets = [];
   all.forEach((a) => {
     let created = new Date(a.created);
@@ -243,6 +283,7 @@ Controller.getOldTickets = async () => {
 /**
  *
  * @param {String} ticketID
+ * @returns {Promise<Boolean}
  */
 Controller.closeTicket = async (ticketID) => {
   let ticket = await ticketModel.findOne({ ticketID: ticketID });
@@ -255,6 +296,20 @@ Controller.closeTicket = async (ticketID) => {
 /**
  *
  * @param {String} ticketID
+ * @returns {Promise<Boolean}
+ */
+Controller.setUrgent = async (ticketID) => {
+  let ticket = await ticketModel.findOne({ ticketID: ticketID });
+  if (!ticket) return false;
+  ticket.urgent = true;
+  await ticket.save();
+  return true;
+};
+
+/**
+ *
+ * @param {String} ticketID
+ * @returns {Promise<Boolean}
  */
 Controller.deleteTicket = async (ticketID) => {
   await ticketModel.findOneAndDelete({ ticketID: ticketID });

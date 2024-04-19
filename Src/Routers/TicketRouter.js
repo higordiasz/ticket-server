@@ -9,13 +9,19 @@ ticketRouter.get(
   Controller.ticket.get
 );
 
-ticketRouter.post(
-  "/update/:ticketID",
+ticketRouter.get(
+  "/getall/:ticketID",
   Controller.middleware.authentication,
-  Controller.ticket.update
+  Controller.ticket.getAll
 );
 
-ticketRouter.post(
+ticketRouter.get(
+  "/urgent/:ticketID",
+  Controller.middleware.authentication,
+  Controller.ticket.setUrgent
+);
+
+ticketRouter.get(
   "/close/:ticketID",
   Controller.middleware.authentication,
   Controller.ticket.close

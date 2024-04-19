@@ -15,4 +15,6 @@ Validate.checkBody = (body) => {
   return true;
 };
 
+Validate.createTicketBody = (body) => {};
+
 export default Validate;

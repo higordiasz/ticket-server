@@ -1,8 +1,14 @@
 import * as Tools from "../Helpers/index.js";
 import * as Models from "../Models/index.js";
+import { response } from "express";
 
 const Response = {};
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.unauthorized = (res, language = "default") => {
   return res.status(401).send({
     error: true,
@@ -11,6 +17,11 @@ Response.unauthorized = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.loginFailed = (res, language = "default") => {
   return res.status(401).send({
     error: true,
@@ -19,6 +30,11 @@ Response.loginFailed = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.loginSuccess = (res, token, language = "default") => {
   return res.status(200).send({
     error: false,
@@ -27,6 +43,11 @@ Response.loginSuccess = (res, token, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.checkFailed = (res, language = "default") => {
   return res.status(401).send({
     error: true,
@@ -35,6 +56,11 @@ Response.checkFailed = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.checkSuccess = (res, language = "default") => {
   return res.status(200).send({
     error: false,
@@ -43,6 +69,11 @@ Response.checkSuccess = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.missingRequiredFields = (res, language = "default") => {
   return res.status(400).send({
     error: true,
@@ -51,6 +82,11 @@ Response.missingRequiredFields = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.emailExist = (res, language = "default") => {
   return res.status(400).send({
     error: true,
@@ -59,6 +95,11 @@ Response.emailExist = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.usernameExist = (res, language = "default") => {
   return res.status(400).send({
     error: true,
@@ -67,6 +108,11 @@ Response.usernameExist = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.userNotCreated = (res, language = "default") => {
   return res.status(201).send({
     error: true,
@@ -75,6 +121,11 @@ Response.userNotCreated = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.userCreated = (res, language = "default") => {
   return res.status(400).send({
     error: false,
@@ -83,6 +134,11 @@ Response.userCreated = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.defaultErrorMessage = (res, language = "default") => {
   return res.status(400).send({
     error: false,
@@ -91,6 +147,12 @@ Response.defaultErrorMessage = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {Object} user
+ * @param {String} language
+ */
 Response.sendUser = (res, user, language = "default") => {
   return res.status(200).send({
     error: false,
@@ -99,6 +161,11 @@ Response.sendUser = (res, user, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
 Response.defaultSuccessMessage = (res, language = "default") => {
   return res.status(200).send({
     error: false,
@@ -107,6 +174,12 @@ Response.defaultSuccessMessage = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {Object} ticket
+ * @param {String} language
+ */
 Response.sendTicket = (res, ticket, language = "default") => {
   return res.status(200).send({
     error: false,
@@ -114,11 +187,26 @@ Response.sendTicket = (res, ticket, language = "default") => {
     message: Tools.Language.getMessage("DEFAULT_SUCCESS", language),
   });
 };
+
+/**
+ *
+ * @param {response} res
+ * @param {Array<Object>} tickets
+ * @param {String} language
+ */
 Response.sendTickets = (res, tickets, language = "default") => {
   return res.status(200).send({
     error: false,
     data: { tickets: tickets },
     message: Tools.Language.getMessage("DEFAULT_SUCCESS", language),
+  });
+};
+
+Response.ticketNotFound = (res, language = "default") => {
+  return res.status(400).send({
+    error: false,
+    data: { tickets: tickets },
+    message: Tools.Language.getMessage("TICKET_NOT_FOUND", language),
   });
 };
 

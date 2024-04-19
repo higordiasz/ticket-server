@@ -26,7 +26,21 @@ class Ticket {
 
   /**
    *
+   * @param {Array<Ticket} tickets
+   * @returns {Array<Object>}
+   */
+  static arrayToJson(tickets) {
+    let aux = [];
+    for (let i = 0; i < tickets.length; i++) {
+      aux.push(tickets[i].covnertToJson());
+    }
+    return aux;
+  }
+
+  /**
+   *
    * @param {JSON} ticket
+   * @returns {Boolean}
    */
   static validateFormat(ticket) {
     if (!ticket.created) return false;
@@ -44,6 +58,10 @@ class Ticket {
     return true;
   }
 
+  /**
+   *
+   * @returns {Object}
+   */
   covnertToJson() {
     let messagesJson = [];
     for (let i = 0; i < this.messages; i++) {
@@ -59,6 +77,10 @@ class Ticket {
     };
   }
 
+  /**
+   *
+   * @returns {Array<Object>}
+   */
   messagesJson() {
     let messagesJson = [];
     for (let i = 0; i < this.messages; i++) {
@@ -95,6 +117,10 @@ class Message {
     this.ownerID = ownerID;
   }
 
+  /**
+   *
+   * @returns {Object}
+   */
   covnertToJson() {
     return {
       fullName: this.fullName,

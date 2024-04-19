@@ -55,8 +55,12 @@
     "en": "Token working.",
     "pt-br": "Token funcionando."
   },
+  "TICKET_NOT_FOUND": {
+    "en": "No ticket was found.",
+    "pt-br": "Nenhum ticket foi encontrado."
+  },
   "": {
     "en": "",
-    "pt-br": ""
+    "pt-bt": ""
   }
 }
