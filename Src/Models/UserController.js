@@ -128,8 +128,7 @@ Controller.changePassword = async (userID, newPassword) => {
   if (!isNaN(newPassword)) return false;
   if (newPassword.length < Tools.Config.minPasswordLength) return false;
   if (newPassword.length > Tools.Config.maxPasswordLength) return false;
-  let password = md5(newPassword);
-  user.password = md5(password);
+  user.password = md5(newPassword);
   await user.save();
   return true;
 };
