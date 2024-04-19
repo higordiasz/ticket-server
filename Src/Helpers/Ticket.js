@@ -2,7 +2,9 @@ class Ticket {
   /**
    *
    * @param {String} ownerID
+   * @param {String} title
    * @param {String} description
+   * @param {String} ticketID
    * @param {Array<Message>} messages
    * @param {Boolean} urgent
    * @param {Boolean} resolved
@@ -10,13 +12,17 @@ class Ticket {
    */
   constructor(
     ownerID,
+    title,
     description,
     messages,
+    ticketID = "",
     urgent = false,
     resolved = false,
     created = new Date(Date.now())
   ) {
     this.created = created;
+    this.title = title;
+    this.ticketID = ticketID;
     this.ownerID = ownerID;
     this.description = description;
     this.messages = messages;
@@ -45,6 +51,8 @@ class Ticket {
   static validateFormat(ticket) {
     if (!ticket.created) return false;
     if (!ticket.ownerID) return false;
+    if (!ticket.title) return false;
+    if (!ticket.ticketID) return false;
     if (!ticket.description) return false;
     if (!ticket.messages) return false;
     if (ticket.urgent == null) return false;
@@ -52,6 +60,8 @@ class Ticket {
     if (typeof ticket.created != "date") return false;
     if (typeof ticket.ownerID != "string") return false;
     if (typeof ticket.description != "string") return false;
+    if (typeof ticket.ticketID != "string") return false;
+    if (typeof ticket.title != "string") return false;
     if (!Array.isArray(ticket.messages)) return false;
     if (typeof ticket.urgent != "boolean") return false;
     if (typeof ticket.resolved != "boolean") return false;
@@ -69,6 +79,7 @@ class Ticket {
     }
     return {
       created: this.created,
+      title: this.title,
       description: this.description,
       messages: this.messages,
       ownerID: this.ownerID,

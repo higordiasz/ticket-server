@@ -23,41 +23,11 @@ Controller.get = async (req, res) => {
  * @param {request} req
  * @param {response} res
  */
-Controller.update = async (req, res) => {
-  let body = req.body;
-  let query = req.query;
-  let language = query.lang || "default";
-  if (!body.token) return Tools.Response.unauthorized(res, language);
-  let user = await Controllers.user.getuserByToken(body.token);
-  if (
-    !Tools.Permissions.havePermission(
-      Tools.Permissions.List.user.update_user,
-      user.accountType
-    )
-  )
-    return Tools.Response.unauthorized(res, language);
-  let updateJson = {};
-  if (body.name != null) updateJson.name = body.name;
-  if (body.email != null) updateJson.email = body.email;
-  if (body.username != null) updateJson.username = body.username;
-  if (body.company != null) updateJson.company = body.company;
-  if (body.departments != null) updateJson.departments = body.departments;
-  let completed = await Controllers.user.updateUser(body.token, updateJson);
-  if (completed) return Tools.Response.defaultSuccessMessage(res, language);
-  return Tools.Response.defaultErrorMessage(res, language);
-};
-
-/**
- *
- * @param {request} req
- * @param {response} res
- */
 Controller.disable = async (req, res) => {
   let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
-  if (!body.token) return Tools.Response.unauthorized(res, language);
-  let user = await Controllers.user.getuserByToken(body.token);
+  let user = req.user;
   if (
     !Tools.Permissions.havePermission(
       Tools.Permissions.List.user.administrator,
@@ -80,8 +50,7 @@ Controller.enable = async (req, res) => {
   let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
-  if (!body.token) return Tools.Response.unauthorized(res, language);
-  let user = await Controllers.user.getuserByToken(body.token);
+  let user = req.user;
   if (
     !Tools.Permissions.havePermission(
       Tools.Permissions.List.user.administrator,
@@ -104,8 +73,7 @@ Controller.changePassword = async (req, res) => {
   let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
-  if (!body.token) return Tools.Response.unauthorized(res, language);
-  let user = await Controllers.user.getuserByToken(body.token);
+  let user = req.user;
   if (
     !Tools.Permissions.havePermission(
       Tools.Permissions.List.user.change_password,
@@ -133,8 +101,7 @@ Controller.create = async (req, res) => {
   let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
-  if (!body.token) return Tools.Response.unauthorized(res, language);
-  let user = await Controllers.user.getuserByToken(body.token);
+  let user = req.user;
   if (
     !Tools.Permissions.havePermission(
       Tools.Permissions.List.user.create_user,

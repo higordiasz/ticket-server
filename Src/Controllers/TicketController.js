@@ -163,6 +163,20 @@ Controller.create = async (req, res) => {
     )
   )
     return Tools.Response.unauthorized(res, language);
+  if (!Tools.Validate.createTicketBody(body))
+    return Tools.Response.missingRequiredFields(res, language);
+  let firstMessage = new Message(
+    user.fullName,
+    body.description,
+    1,
+    user.userID
+  );
+  let ticket = new Ticket(user.userID, body.title, body.description, [
+    firstMessage,
+  ]);
+  if (await DB.Controllers.ticket.createTicket(ticket))
+    return Tools.Response.defaultSuccessMessage(res, language);
+  return Tools.Response.defaultErrorMessage(res, language);
 };
 
 /**
@@ -183,6 +197,17 @@ Controller.addMessage = async (req, res) => {
     )
   )
     return Tools.Response.unauthorized(res, language);
+  if (!Tools.Validate.messageTicketBody(body))
+    return Tools.Response.missingRequiredFields(res, language);
+  let message = new Message(
+    user.fullNamem,
+    body.message,
+    body.type,
+    user.userID
+  );
+  if (await DB.Controllers.ticket.addMessage(message, ticketID))
+    return Tools.Response.defaultSuccessMessage(res, language);
+  return Tools.Response.defaultErrorMessage(res, language);
 };
 
 export default Controller;

@@ -10,12 +10,6 @@ userRouter.get(
 );
 
 userRouter.post(
-  "/update/:userID",
-  Controller.middleware.authentication,
-  Controller.user.update
-);
-
-userRouter.post(
   "/disable/:userID",
   Controller.middleware.authentication,
   Controller.user.disable

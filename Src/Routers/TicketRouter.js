@@ -30,7 +30,7 @@ ticketRouter.get(
 ticketRouter.post(
   "/message/add/:ticketID",
   Controller.middleware.authentication,
-  Controller.addMessage
+  Controller.ticket.addMessage
 );
 
 ticketRouter.post(

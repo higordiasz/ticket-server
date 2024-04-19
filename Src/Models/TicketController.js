@@ -14,6 +14,7 @@ Controller.createTicket = async (ticket) => {
   return await ticketModel
     .create({
       created: ticket.created,
+      title: ticket.title,
       description: ticket.description,
       messages: ticket.messagesJson(),
       ownerID: ticket.ownerID,
@@ -56,8 +57,10 @@ Controller.getTicket = async (ticketID) => {
   if (!ticket) return null;
   let t = new Ticket(
     ticket.ownerID,
+    ticket.title,
     ticket.description,
     [],
+    ticket.ticketID,
     ticket.urgent,
     ticket.resolved,
     ticket.created
@@ -83,8 +86,10 @@ Controller.getAllTickets = async () => {
   tickets.forEach((ticket) => {
     let t = new Ticket(
       ticket.ownerID,
+      ticket.title,
       ticket.description,
       [],
+      ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
       ticket.created
@@ -113,8 +118,10 @@ Controller.getAllTicketsFromUser = async (userID) => {
   tickets.forEach((ticket) => {
     let t = new Ticket(
       ticket.ownerID,
+      ticket.title,
       ticket.description,
       [],
+      ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
       ticket.created
@@ -146,8 +153,10 @@ Controller.getUrgentTickets = async (isUser = false, userID = "") => {
   tickets.forEach((ticket) => {
     let t = new Ticket(
       ticket.ownerID,
+      ticket.title,
       ticket.description,
       [],
+      ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
       ticket.created
@@ -179,8 +188,10 @@ Controller.getClosedTickets = async (isUser = false, userID = "") => {
   tickets.forEach((ticket) => {
     let t = new Ticket(
       ticket.ownerID,
+      ticket.title,
       ticket.description,
       [],
+      ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
       ticket.created
@@ -220,8 +231,10 @@ Controller.getNewTickets = async (isUser = false, userID = "") => {
   tickets.forEach((ticket) => {
     let t = new Ticket(
       ticket.ownerID,
+      ticket.title,
       ticket.description,
       [],
+      ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
       ticket.created
@@ -261,8 +274,10 @@ Controller.getOldTickets = async (isUser = false, userID = "") => {
   tickets.forEach((ticket) => {
     let t = new Ticket(
       ticket.ownerID,
+      ticket.title,
       ticket.description,
       [],
+      ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
       ticket.created
