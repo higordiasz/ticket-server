@@ -33,6 +33,15 @@ const ticketSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  problem: {
+    type: String,
+    required: true,
+    default: "others",
+  },
+  department: {
+    type: String,
+    required: true,
+  },
 });
 
 const ticketModel = model("ticket", ticketSchema);

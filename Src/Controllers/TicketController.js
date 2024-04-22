@@ -5,6 +5,10 @@ import * as DB from "../Models/index.js";
 
 const Controller = {};
 const Private = {};
+Private.Ticket = {
+  Status: ["new", "old", "urgent", "close", "all"],
+  Types: ["user", "all"],
+};
 
 /**
  *
@@ -84,10 +88,17 @@ Controller.get = async (req, res) => {
 Controller.getAll = async (req, res) => {
   let query = req.query;
   let language = query.lang || "default";
-  let status = query.status || "new";
-  let type = query.type || "user";
+  if (
+    !Private.Ticket.Status.includes(query.status.toLowerCase()) ||
+    !Private.Ticket.Types.includes(query.type.toLowerCase())
+  )
+    return Tools.Response.missingRequiredFields(res, language);
+  let status = query.status;
+  let type = query.type;
   let user = req.user;
   let tickets;
+  if (!user.accountType == "support" || !user.accountType == "admin")
+    type = "user";
   switch (type) {
     case "user":
       tickets = await Private.getAllUserTicket(user.userID, status);
@@ -97,9 +108,26 @@ Controller.getAll = async (req, res) => {
       break;
     default:
       tickets = null;
+      break;
   }
   if (!tickets) return Tools.Response.missingRequiredFields(res, language);
-  return Tools.Response.sendTickets(res, Ticket.arrayToJson(tickets), language);
+  if (status == "all") {
+    let t = Ticket.organizeArrayByType(tickets);
+    let r = {
+      New: Ticket.arrayToJson(Ticket.organizeArrayToCreatedDate(t.News)),
+      Old: Ticket.arrayToJson(Ticket.organizeArrayToCreatedDate(t.Old)),
+      Urgent: Ticket.arrayToJson(Ticket.organizeArrayToCreatedDate(t.Urgent)),
+      Closed: Ticket.arrayToJson(Ticket.organizeArrayToCreatedDate(t.Closed)),
+    };
+    return Tools.Response.sendTickets(res, r, language);
+  } else {
+    tickets = Ticket.organizeArrayToCreatedDate(tickets);
+    return Tools.Response.sendTickets(
+      res,
+      Ticket.arrayToJson(tickets),
+      language
+    );
+  }
 };
 
 /**
@@ -171,9 +199,18 @@ Controller.create = async (req, res) => {
     1,
     user.userID
   );
-  let ticket = new Ticket(user.userID, body.title, body.description, [
-    firstMessage,
-  ]);
+  let ticket = new Ticket(
+    user.userID,
+    body.title,
+    body.description,
+    [firstMessage],
+    "",
+    false,
+    false,
+    new Date(Date.now()),
+    body.problem,
+    body.department
+  );
   if (await DB.Controllers.ticket.createTicket(ticket))
     return Tools.Response.defaultSuccessMessage(res, language);
   return Tools.Response.defaultErrorMessage(res, language);
@@ -200,7 +237,7 @@ Controller.addMessage = async (req, res) => {
   if (!Tools.Validate.messageTicketBody(body))
     return Tools.Response.missingRequiredFields(res, language);
   let message = new Message(
-    user.fullNamem,
+    user.fullName,
     body.message,
     body.type,
     user.userID

@@ -1,0 +1,46 @@
+{
+  "PROBLEMLIST": {
+    "COMPUTER": {
+      "NAME": {
+        "pt-br": "Computador",
+        "en": "Computer"
+      }
+    },
+    "PRINTER": {
+      "NAME": {
+        "pt-br": "Impressora",
+        "en": "Printer"
+      }
+    },
+    "INTERNET": {
+      "NAME": {
+        "pt-br": "Internet",
+        "en": "Internet"
+      }
+    },
+    "WIFI": {
+      "NAME": {
+        "pt-br": "Wifi",
+        "en": "Wifi"
+      }
+    },
+    "GPI": {
+      "NAME": {
+        "pt-br": "GPI",
+        "en": "GPI"
+      }
+    },
+    "RG": {
+      "NAME": {
+        "pt-br": "RG",
+        "en": "RG"
+      }
+    },
+    "OTHERS": {
+      "NAME": {
+        "pt-br": "Outros",
+        "en": "Others"
+      }
+    }
+  }
+}

@@ -35,7 +35,6 @@ Controller.check = async (req, res) => {
   let body = req.body;
   let query = req.query;
   let language = query.lang || "default";
-  console.log(body.token);
   if (!Tools.Validate.checkBody(body))
     return Tools.Response.checkFailed(res, language);
   let user = await DB.Controllers.user.getuserByToken(body.token);

@@ -9,6 +9,7 @@ import Return from "./Return.js";
 import Token from "./Token.js";
 import { Ticket, Message } from "./Ticket.js";
 import Validate from "./Validate.js";
+import ProblemList from "./Problem.js";
 
 export {
   webHook,
@@ -23,4 +24,5 @@ export {
   Ticket,
   Message,
   Validate,
+  ProblemList,
 };

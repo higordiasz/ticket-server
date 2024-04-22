@@ -21,6 +21,8 @@ Controller.createTicket = async (ticket) => {
       resolved: ticket.resolved,
       urgent: ticket.urgent,
       ticketID: ticketID,
+      problem: ticket.problem,
+      department: ticket.department,
     })
     .then(() => {
       return true;
@@ -63,7 +65,9 @@ Controller.getTicket = async (ticketID) => {
     ticket.ticketID,
     ticket.urgent,
     ticket.resolved,
-    ticket.created
+    ticket.created,
+    ticket.problem,
+    ticket.department
   );
   for (let i = 0; i < ticket.messages.length; i++) {
     t.addMessage(
@@ -92,7 +96,9 @@ Controller.getAllTickets = async () => {
       ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
-      ticket.created
+      ticket.created,
+      ticket.problem,
+      ticket.department
     );
     for (let i = 0; i < ticket.messages.length; i++) {
       t.addMessage(
@@ -124,7 +130,9 @@ Controller.getAllTicketsFromUser = async (userID) => {
       ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
-      ticket.created
+      ticket.created,
+      ticket.problem,
+      ticket.department
     );
     for (let i = 0; i < ticket.messages.length; i++) {
       t.addMessage(
@@ -159,7 +167,9 @@ Controller.getUrgentTickets = async (isUser = false, userID = "") => {
       ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
-      ticket.created
+      ticket.created,
+      ticket.problem,
+      ticket.department
     );
     for (let i = 0; i < ticket.messages.length; i++) {
       t.addMessage(
@@ -194,7 +204,9 @@ Controller.getClosedTickets = async (isUser = false, userID = "") => {
       ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
-      ticket.created
+      ticket.created,
+      ticket.problem,
+      ticket.department
     );
     for (let i = 0; i < ticket.messages.length; i++) {
       t.addMessage(
@@ -237,7 +249,9 @@ Controller.getNewTickets = async (isUser = false, userID = "") => {
       ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
-      ticket.created
+      ticket.created,
+      ticket.problem,
+      ticket.department
     );
     for (let i = 0; i < ticket.messages.length; i++) {
       t.addMessage(
@@ -280,7 +294,9 @@ Controller.getOldTickets = async (isUser = false, userID = "") => {
       ticket.ticketID,
       ticket.urgent,
       ticket.resolved,
-      ticket.created
+      ticket.created,
+      ticket.problem,
+      ticket.department
     );
     for (let i = 0; i < ticket.messages.length; i++) {
       t.addMessage(
