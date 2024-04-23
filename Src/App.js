@@ -38,6 +38,7 @@ app.use("/", Routers.indexRouter);
 app.use("/login", Routers.loginRouter);
 app.use("/ticket", Routers.ticketRouter);
 app.use("/user", Routers.userRouter);
+app.use("/notifaction", Routers.notificationRouter);
 
 app.use((req, res, next) => {
   return res.redirect("/");

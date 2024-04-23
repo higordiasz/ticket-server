@@ -228,4 +228,17 @@ Response.userDisabled = (res, language = "default") => {
   });
 };
 
+/**
+ *
+ * @param {response} res
+ * @param {String} language
+ */
+Response.sendnotifications = (res, notifications, language = "default") => {
+  return res.status(200).send({
+    error: false,
+    data: { notifications },
+    message: Tools.Language.getMessage("DEFAULT_SUCCESS", language),
+  });
+};
+
 export default Response;

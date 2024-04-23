@@ -10,6 +10,7 @@ import Token from "./Token.js";
 import { Ticket, Message } from "./Ticket.js";
 import Validate from "./Validate.js";
 import ProblemList from "./Problem.js";
+import Notification from "./Notification.js";
 
 export {
   webHook,
@@ -23,6 +24,7 @@ export {
   Token,
   Ticket,
   Message,
+  Notification,
   Validate,
   ProblemList,
 };

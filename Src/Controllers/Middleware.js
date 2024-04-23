@@ -11,8 +11,6 @@ const Middleware = {};
 Middleware.authentication = async (req, res, next) => {
   let token = req.headers.authorization || "";
   let language = req.query.lang || "default";
-  console.log(req.headers);
-  console.log("Token: " + token);
   if (token == "") return Tools.Response.unauthorized(res, language);
   let user = await DB.Controllers.user.getuserByToken(token);
   if (!user) return Tools.Response.unauthorized(res, language);
