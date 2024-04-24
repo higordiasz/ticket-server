@@ -1,3 +1,5 @@
+import { Controllers } from "../Models/index.js";
+
 class Notification {
   /**
    *
@@ -6,20 +8,22 @@ class Notification {
    * @param {String} type
    * @param {Boolean} read
    * @param {String} notificationID
+   * @param {String} ticketID
    * @param {Date} created
    */
-  constructor(title, message, type, read, notificationID, created) {
+  constructor(title, message, type, read, notificationID, ticketID, created) {
     this.title = title;
     this.message = message;
     this.type = type;
     this.read = read;
     this.notificationID = notificationID;
+    this.ticketID = ticketID;
     this.created = created;
   }
 
   /**
    * Convert to JSON format
-   * @returns {Object}
+   * @returns {{title, message, type, read, notificationID, ticketID, created}}
    */
   convertToJson() {
     return {
@@ -28,6 +32,7 @@ class Notification {
       type: this.type,
       read: this.read,
       notificationID: this.notificationID,
+      ticketID: this.ticketID,
       created: this.created,
     };
   }
@@ -71,6 +76,64 @@ class Notification {
       ret.push(a.convertToJson());
     });
     return ret;
+  }
+
+  /**
+   *
+   * @param {{title, message, type, ticketID}} body
+   * @returns {Notification}
+   */
+  static createNotificationFromObject(body) {
+    if (!this.checkFormat(body)) return null;
+    return new Notification(
+      body.title,
+      body.message,
+      body.type,
+      false,
+      this.generateID(),
+      this.ticketID,
+      new Date(Date.now())
+    );
+  }
+
+  /**
+   *
+   * @param {String} userID
+   * @param {Notification} notification
+   * @returns {Promise<Boolean>}
+   */
+  static async sendNotificationToUser(userID, notification) {
+    const created = await Controllers.notification.createNotification(
+      notification,
+      userID
+    );
+    return created;
+  }
+
+  /**
+   *
+   * @param {Notification} notification
+   * @returns {Promise<Boolean>}
+   */
+  static async sendNotificationToSupport(notification) {
+    const created = await Controllers.notification.createNotification(
+      notification,
+      "support"
+    );
+    return created;
+  }
+
+  /**
+   *
+   * @param {Notification} notification
+   * @returns {Promise<Boolean>}
+   */
+  static async sendNotificationToAdmin(notification) {
+    const created = await Controllers.notification.createNotification(
+      notification,
+      "admin"
+    );
+    return created;
   }
 }
 

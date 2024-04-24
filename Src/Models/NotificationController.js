@@ -3,15 +3,15 @@ import { userModel as UserModel } from "./UserModel.js";
 import { Notification } from "../Helpers/index.js";
 
 const Controller = {};
-
+const officenotification = ["admin", "support"];
 /**
  *
  * @param {Notification} notification
  * @returns {Promise<Boolean>}
  */
-Controller.createNotification = async (notificationID, userID) => {
+Controller.createNotification = async (notification, userID) => {
   const user = await UserModel.findOne({ userID: userID });
-  if (!user) return false;
+  if (!user && !officenotification.includes(userID)) return false;
   const notifications = await Model.findOne({ userID: userID });
   if (!notifications) {
     const created = await Model.create({
@@ -47,7 +47,7 @@ Controller.createNotification = async (notificationID, userID) => {
  */
 Controller.markAsRead = async (notificationID, userID) => {
   const user = await UserModel.findOne({ userID: userID });
-  if (!user) return false;
+  if (!user && !officenotification.includes(userID)) return false;
   const notifications = await Model.findOne({ userID: userID });
   if (!notifications) return false;
   const index = notifications.notifications.findIndex(
@@ -73,7 +73,7 @@ Controller.markAsRead = async (notificationID, userID) => {
  */
 Controller.removeNotification = async (notificationID, userID) => {
   const user = await UserModel.findOne({ userID: userID });
-  if (!user) return false;
+  if (!user && !officenotification.includes(userID)) return false;
   const notifications = await Model.findOne({ userID: userID });
   if (!notifications) return false;
   notifications.notifications = notifications.notifications.filter(
@@ -97,7 +97,7 @@ Controller.removeNotification = async (notificationID, userID) => {
  */
 Controller.getAllNotification = async (userID) => {
   const user = await UserModel.findOne({ userID: userID });
-  if (!user) return null;
+  if (!user && !officenotification.includes(userID)) return null;
   const notifications = await Model.findOne({ userID: userID });
   if (!notifications) return [];
   let ret = [];

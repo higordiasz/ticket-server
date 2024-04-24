@@ -57,17 +57,4 @@ Controller.removeNotification = async (req, res) => {
   return Tools.Response.defaultErrorMessage(res, language);
 };
 
-/**
- *
- * @param {request} req
- * @param {response} res
- */
-Controller.createNotification = async (req, res) => {
-  const user = req.user;
-  const language = req.query.lang || "default";
-  const body = req.body;
-  const valid = Tools.Notification.checkFormat(body);
-  if (!valid) return Tools.Response.missingRequiredFields(req, language);
-};
-
 export default Controller;

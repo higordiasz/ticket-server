@@ -21,10 +21,4 @@ router.get(
   Controller.notification.removeNotification
 );
 
-router.post(
-  "/create",
-  Controller.middleware.authentication,
-  Controller.notification.createNotification
-);
-
 export default router;
