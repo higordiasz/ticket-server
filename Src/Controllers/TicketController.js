@@ -211,8 +211,19 @@ Controller.create = async (req, res) => {
     body.problem,
     body.department
   );
-  if (await DB.Controllers.ticket.createTicket(ticket))
+  const created = await DB.Controllers.ticket.createTicket(ticket);
+  if (created.created) {
+    const notification = Tools.NotificationHelper.newTicketCreate(
+      created.ticketID,
+      language
+    );
+    await DB.Controllers.notification.createNotification(
+      notification,
+      "support"
+    );
+    await DB.Controllers.notification.createNotification(notification, "admin");
     return Tools.Response.defaultSuccessMessage(res, language);
+  }
   return Tools.Response.defaultErrorMessage(res, language);
 };
 
@@ -242,8 +253,33 @@ Controller.addMessage = async (req, res) => {
     body.type,
     user.userID
   );
-  if (await DB.Controllers.ticket.addMessage(message, ticketID))
+  if (await DB.Controllers.ticket.addMessage(message, ticketID)) {
+    const ticket = await DB.Controllers.ticket.getTicket(ticketID);
+    if (user.userID === ticket.ownerID) {
+      const notification = Tools.NotificationHelper.newMessageNotification(
+        ticketID,
+        language
+      );
+      await DB.Controllers.notification.createNotification(
+        notification,
+        "support"
+      );
+      await DB.Controllers.notification.createNotification(
+        notification,
+        "admin"
+      );
+    } else {
+      const notification = Tools.NotificationHelper.newMessageNotification(
+        ticketID,
+        language
+      );
+      await DB.Controllers.notification.createNotification(
+        notification,
+        user.userID
+      );
+    }
     return Tools.Response.defaultSuccessMessage(res, language);
+  }
   return Tools.Response.defaultErrorMessage(res, language);
 };
 

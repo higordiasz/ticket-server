@@ -7,11 +7,11 @@ const Controller = {};
 /**
  *
  * @param {Ticket} ticket
- * @returns {Promise<Boolean}
+ * @returns {Promise<{created: Boolean, ticketID: String}>}
  */
 Controller.createTicket = async (ticket) => {
   let ticketID = uuidv4();
-  return await ticketModel
+  let created = await ticketModel
     .create({
       created: ticket.created,
       title: ticket.title,
@@ -30,6 +30,7 @@ Controller.createTicket = async (ticket) => {
     .catch(() => {
       return false;
     });
+  return { created, ticketID };
 };
 
 /**

@@ -11,6 +11,7 @@ import { Ticket, Message } from "./Ticket.js";
 import Validate from "./Validate.js";
 import ProblemList from "./Problem.js";
 import Notification from "./Notification.js";
+import NotificationHelper from "./NotificationHelper.js";
 
 export {
   webHook,
@@ -27,4 +28,5 @@ export {
   Notification,
   Validate,
   ProblemList,
+  NotificationHelper,
 };

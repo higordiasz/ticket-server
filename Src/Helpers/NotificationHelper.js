@@ -14,10 +14,11 @@ Titles.newMessage = {
 };
 /**
  *
+ * @param {String} ticketID
  * @param {String} language
  * @returns {Notification}
  */
-Helper.newMessageNotification = (language = "en") => {
+Helper.newMessageNotification = (ticketID, language = "en") => {
   const title = Titles.newMessage[language];
   const message = Messages.newMessage[language];
   return new Notification(
@@ -25,6 +26,7 @@ Helper.newMessageNotification = (language = "en") => {
     message,
     "message",
     false,
+    ticketID,
     Notification.generateID(),
     new Date(Date.now())
   );
@@ -40,10 +42,11 @@ Titles.newTicketCreate = {
 };
 /**
  *
+ * @param {String} ticketID
  * @param {String} language
  * @returns {Notification}
  */
-Helper.newTicketCreate = (language = "en") => {
+Helper.newTicketCreate = (ticketID, language = "en") => {
   const title = Titles.newTicketCreate[language];
   const message = Messages.newTicketCreate[language];
   return new Notification(
@@ -52,6 +55,7 @@ Helper.newTicketCreate = (language = "en") => {
     "create",
     false,
     Notification.generateID(),
+    ticketID,
     new Date(Date.now())
   );
 };
