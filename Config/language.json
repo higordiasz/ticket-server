@@ -63,6 +63,22 @@
     "en": "User disabled.",
     "pt-br": "Usuário desativado."
   },
+  "NEW_TICKET_CREATE": {
+    "en": "A new ticket has been opened in the system.",
+    "pt-bt": "Foi aberto um novo chamado no sistema."
+  },
+  "TICKET_MARKED_CLOSED": {
+    "en": "A ticket has been closed.",
+    "pt-bt": "Um chamado foi fechado."
+  },
+  "TICKET_MARKED_URGENT": {
+    "en": "A ticket has been marked as urgent.",
+    "pt-bt": "Um chamado foi marcado como urgente."
+  },
+  "TICKET_NEW_MESSAGE": {
+    "en": "A new message has been added to a ticket.",
+    "pt-bt": "Foi adicionada uma nova mensagem em um chamado."
+  },
   "": {
     "en": "",
     "pt-bt": ""
