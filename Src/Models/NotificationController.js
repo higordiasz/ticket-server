@@ -7,6 +7,7 @@ const officenotification = ["admin", "support"];
 /**
  *
  * @param {Notification} notification
+ * @param {String} userID
  * @returns {Promise<Boolean>}
  */
 Controller.createNotification = async (notification, userID) => {
